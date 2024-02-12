@@ -117,7 +117,7 @@ class TranslationCog(commands.Cog):
         time = datetime.utcnow()
         # race condition: bot can finish init of this cog before login
         # if the time is right, posting will fail
-        if time.weekday() == 2 or time.weekday() == 5:
+        if time.weekday() in (1, 3, 5):  # tue, thu, sat
             if time.hour == 18 and time.minute == 0:
                 await _post_translation_challenge(self.bot)
 
