@@ -37,7 +37,7 @@ async def _post_translation_challenge(bot: Ilo):
     challenge_number = sentence.challenge_number
 
     msg = await channel.send(
-        f"__**Biweekly Translation Challenge {challenge_number}**__\n\n"
+        f"__**Translation Challenge {challenge_number}**__\n\n"
         f"{role.mention} Translate this sentence into toki pona!\n"
         f"> {sentence.sentence}\n\n"
         f"Discuss in the thread below. **Spoiler your answers!**",
