@@ -37,10 +37,11 @@ async def _post_translation_challenge(bot: Ilo):
     challenge_number = sentence.challenge_number
 
     msg = await channel.send(
-        f"__**Translation Challenge {challenge_number}**__\n\n"
-        f"{role.mention} Translate this sentence into toki pona!\n"
+        f"## __**Translation Challenge {challenge_number}**__\n"
+        f"{role.mention} Translate this sentence!\n\n"
         f"> {sentence.sentence}\n\n"
-        f"Discuss in the thread below. **Spoiler your answers!**",
+        f"Discuss in the thread below. **Spoiler your answers!**\n"
+        f"For added challenge, handwrite your answer in **sitelen pona**!",
         allowed_mentions=discord.AllowedMentions(roles=[role]),
     )
     await msg.create_thread(name=f"Challenge {challenge_number}")
