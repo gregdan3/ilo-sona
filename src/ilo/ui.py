@@ -22,7 +22,7 @@ class TranslationCogSubmitModal(discord.ui.Modal):
 
     async def callback(self, interaction: discord.Interaction):
         await interaction.response.send_message(
-            content="mi pana e toki sina tawa lawa ma! lawa li wile lukin e toki sina. o awen."
+            content="mi pana e toki sina tawa lawa ma! lawa li wile lukin e toki sina. o awen.\n"
             "I submitted your sentence to the overlords! Please wait for approval.",
             ephemeral=True,
         )
