@@ -68,7 +68,9 @@ class TranslationCog(commands.Cog):
         cleaned = submission.replace("\n", " ")
         if self.bot.db.sentence_exists(cleaned):
             await ctx.respond(
-                f"Sorry, it looks like that sentence has already been submitted!\n\n```{submission}```",
+                f"pakala! lukin la, toki ni li lon ilo lon tenpo pini.\n"
+                f"Sorry, it looks like that sentence has already been submitted!\n\n"
+                f"```\n{submission}\n```",
                 ephemeral=True,
             )
             return
