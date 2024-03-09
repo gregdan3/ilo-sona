@@ -87,6 +87,9 @@ class ChallengeDB:
     def get_sentence_by_id(self, id: int) -> Optional[Sentence]:
         return self.s.query(Sentence).get(id)
 
+    def sentence_exists(self, sentence: str) -> bool:
+        return not not self.s.query(Sentence).get(gen_sentence_id(sentence))
+
     def add_sentence(
         self, server_id: int, user_id: int, approval_msg_id: int, sentence_text: str
     ) -> Optional[Sentence]:
