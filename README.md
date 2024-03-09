@@ -34,3 +34,14 @@ Refresh (useful for dev): `make down build up`
   - Takes challenge channel, approval channel, challenge role, approval role, and current challenge number.
 - `/submit`: Pop up a modal to submit a sentence for translation!
 - `/start_challenge`: Debug command that begins a challenge.
+
+## Future features
+
+- What if you could refresh challenge via the approval modal?
+- What if you could refresh a challenge by submitting it again?
+- What if you could see upcoming challenges?
+- What if challenges could be toki pona, prompting you to translate into English etc?
+
+## Future fixes
+
+- What if we didn't use goddamn crc32?
