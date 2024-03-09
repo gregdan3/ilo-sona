@@ -53,7 +53,8 @@ class TranslationCog(commands.Cog):
 
     @commands.guild_only()
     @commands.slash_command(
-        name="submit", description="Submit a sentence to the translation challenge!"
+        name="submit",
+        description="Submit a sentence to the translation challenge! (press enter!)",
     )
     async def submit(self, ctx: ApplicationContext):
         modal = TranslationCogSubmitModal(title="Sentence submission")
