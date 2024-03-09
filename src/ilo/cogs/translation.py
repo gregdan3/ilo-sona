@@ -65,6 +65,13 @@ class TranslationCog(commands.Cog):
         submission = modal.children[0].value
         assert submission
         cleaned = submission.replace("\n", " ")
+        if self.bot.db.sentence_exists(cleaned):
+            await ctx.respond(
+                f"Sorry, it looks like that sentence has already been submitted!\n\n```{submission}```",
+                ephemeral=True,
+            )
+            return
+
         assert ctx.user
         channel = self.bot.get_channel(APPROVAL_CHANNEL)
         assert channel and isinstance(channel, TextChannel)
@@ -77,12 +84,15 @@ class TranslationCog(commands.Cog):
         )
         assert resp
         assert ctx.guild
-        self.bot.db.add_sentence(
+        sentence = self.bot.db.add_sentence(
             server_id=ctx.guild.id,
             user_id=ctx.user.id,
             approval_msg_id=resp.id,
             sentence=cleaned,
         )
+        if not sentence:
+            ...
+            # TODO: panic?
 
     @commands.has_role(TEACHER_ROLE)  # TODO: get role from DB
     @commands.message_command(name="Approve a sentence suggestion")
