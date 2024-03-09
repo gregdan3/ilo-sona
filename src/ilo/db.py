@@ -123,7 +123,7 @@ class ChallengeDB:
         sentence = (
             self.s.query(Sentence)
             .filter_by(server_id=server_id, approved=True, used=False)
-            .order_by(Sentence.submitted)  # oldest
+            .order_by(func.random())
             .first()
         )
         assert sentence
