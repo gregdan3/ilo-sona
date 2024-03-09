@@ -91,11 +91,11 @@ class ChallengeDB:
         return not not self.s.query(Sentence).get(gen_sentence_id(sentence))
 
     def add_sentence(
-        self, server_id: int, user_id: int, approval_msg_id: int, sentence_text: str
+        self, server_id: int, user_id: int, approval_msg_id: int, sentence: str
     ) -> Optional[Sentence]:
 
-        sentence_id = gen_sentence_id(sentence_text)
-        existing_sentence = self.s.query(Sentence).filter_by(id=sentence_id).first()
+        sentence_id = gen_sentence_id(sentence)
+        existing_sentence = self.s.query(Sentence).get(sentence_id)
         if existing_sentence:
             return None
 
@@ -104,7 +104,7 @@ class ChallengeDB:
             server_id=server_id,
             user_id=user_id,
             approval_msg_id=approval_msg_id,
-            sentence=sentence_text,
+            sentence=sentence,
         )
         self.s.add(sentence)
         self.s.commit()
