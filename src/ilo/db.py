@@ -9,7 +9,7 @@ LOG = logging.getLogger()
 Base = declarative_base()
 
 
-def sentence_id(sentence: str) -> int:
+def gen_sentence_id(sentence: str) -> int:
     return crc32(sentence.encode())  # fine for small strings
 
 
@@ -88,17 +88,24 @@ class ChallengeDB:
         return self.s.query(Sentence).get(id)
 
     def add_sentence(
-        self, server_id: int, user_id: int, approval_msg_id: int, sentence: str
-    ) -> Sentence:
+        self, server_id: int, user_id: int, approval_msg_id: int, sentence_text: str
+    ) -> Optional[Sentence]:
+
+        sentence_id = gen_sentence_id(sentence_text)
+        existing_sentence = self.s.query(Sentence).filter_by(id=sentence_id).first()
+        if existing_sentence:
+            return None
+
         sentence = Sentence(
-            id=sentence_id(sentence),
+            id=sentence_id,
             server_id=server_id,
             user_id=user_id,
             approval_msg_id=approval_msg_id,
-            sentence=sentence,
+            sentence=sentence_text,
         )
         self.s.add(sentence)
         self.s.commit()
+
         return sentence
 
     def set_sentence_approval(
